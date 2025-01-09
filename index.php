@@ -1,5 +1,18 @@
 <?php
-$prenom = $_GET['lePrenom']
+$prenom = "toi qui visites";
+$age = null;
+
+if(!empty($_GET['lePrenom'])){
+    $prenom = $_GET['lePrenom'];
+}
+if(!empty($_GET['leAge']) || ctype_digit($_GET['leAge'])){
+    if($_GET['leAge'] >= 18){
+        $age = "tu es majeur";
+    }else{
+        $age = "tu es mineur";
+    }
+
+}
 ?>
 
 
@@ -17,9 +30,12 @@ $prenom = $_GET['lePrenom']
 
 <form method="GET">
     <input type="text" name="lePrenom" placeholder="ton prénom?">
+
+
+    <input type="text" name="leAge" placeholder="ton prénom?">
     <button type="submit" class="btn btn-success">OK</button>
 </form>
-<h2>salut, <?php echo $prenom; ?>!</h2>
+<h2>salut, <?php echo $prenom; echo "<br>"; echo $age; ?>!</h2>
 
 </body>
 </html>
