@@ -1,18 +1,28 @@
 <?php
 $prenom = "toi qui visites";
 $age = null;
+$message = "";
+$motCache = "";
+$signal=false;
+
 
 if(!empty($_GET['lePrenom'])){
     $prenom = $_GET['lePrenom'];
 }
-if(!empty($_GET['leAge']) || ctype_digit($_GET['leAge'])){
-    if($_GET['leAge'] >= 18){
-        $age = "tu es majeur";
-    }else{
-        $age = "tu es mineur";
-    }
 
+if(!empty($_GET['leAge']) && ctype_digit($_GET['leAge']) ){
+    $age = $_GET['leAge'];
 }
+
+if($age && $age < 18 )
+{
+    $message = "tu es mineur";
+}else if($age){
+    $message = "tu es majeur";
+}
+
+
+
 ?>
 
 
@@ -37,5 +47,12 @@ if(!empty($_GET['leAge']) || ctype_digit($_GET['leAge'])){
 </form>
 <h2>salut, <?php echo $prenom; echo "<br>"; echo $age; ?>!</h2>
 
+<form method="POST" action="autrepage.php">
+    <input type="text" name="leMot" placeholder="à quel mot je pense?">
+    <button class="btn btn-primary" type="submit">GO</button>
+</form>
+
+
+<h2><?php if($signal){echo $motCache;};?></h2>
 </body>
 </html>
